@@ -9,7 +9,16 @@ export const Formulario = () => {
                Agregar Cliente
           </h1>
 
-          <Formik>
+          <Formik
+               initialValues={{
+                    nombre : '',
+                    empresa : '',
+                    mail : '',
+                    telf : '',
+                    notas :''
+               }}
+          >
+               {() => (
                <Form className='mt-10'>
                     <div className='mb-4'>
                          <label
@@ -19,6 +28,7 @@ export const Formulario = () => {
                          </label>
                          <Field 
                               id="nombre"
+                              name="nombre"
                               type="password"
                               placeholder="nombre cliente"
                               className="mt-2 block w-full p-3 bg-gray-50"
@@ -33,6 +43,7 @@ export const Formulario = () => {
                          </label>
                          <Field 
                               id="empresa"
+                              name="empresa"
                               type="text"
                               placeholder="Empresa del Cliente"
                               className="mt-2 block w-full p-3 bg-gray-50"
@@ -47,6 +58,7 @@ export const Formulario = () => {
                          </label>
                          <Field 
                               id="mail"
+                              name="mail"
                               type="email"
                               placeholder="email del Cliente"
                               className="mt-2 block w-full p-3 bg-gray-50"
@@ -61,6 +73,7 @@ export const Formulario = () => {
                          </label>
                          <Field 
                               id="telf"
+                              name="telf"
                               type="tel"
                               placeholder="email del Cliente"
                               className="mt-2 block w-full p-3 bg-gray-50"
@@ -75,6 +88,7 @@ export const Formulario = () => {
                          </label>
                          <Field 
                               id="notas"
+                              name="notas"
                               as="textarea"
                               type="text"
                               placeholder="notas del cliente"
@@ -88,7 +102,7 @@ export const Formulario = () => {
                          className='mt-5 w-full p-3 bg-blue-800 text-white uppercase font-bold text-lg text-center'
                     />
                </Form>
-
+                    )}
           </Formik>
     </div>
   )
