@@ -1,0 +1,52 @@
+{
+  "clientes": [
+    {
+      "nombre": "jorge",
+      "empresa": "empresa",
+      "mail": "jordi@email.com",
+      "telf": "938800222",
+      "notas": "buscando cliente",
+      "id": 1
+    },
+    {
+      "nombre": "juan",
+      "empresa": "vtc",
+      "mail": "correo@correo.es",
+      "telf": "888888888",
+      "notas": "recomendaddo por otro cliente",
+      "id": 2
+    },
+    {
+      "nombre": "isabel",
+      "empresa": "diseño isa",
+      "mail": "mycorreo@servidor.com",
+      "telf": "5555555555",
+      "notas": "empresa de diseño",
+      "id": 3
+    },
+    {
+      "nombre": "nefer",
+      "empresa": "nefer s.l.",
+      "mail": "ella@nefer.com",
+      "telf": "34343433334",
+      "notas": "la mejor en ventas",
+      "id": 4
+    },
+    {
+      "nombre": "pepe",
+      "empresa": "pepephone",
+      "mail": "info@pepe.com",
+      "telf": "466666666",
+      "notas": "aburrido",
+      "id": 5
+    },
+    {
+      "nombre": "esmeralda",
+      "empresa": "piedra del oriente",
+      "mail": "esmeralda@export.com",
+      "telf": "222222",
+      "notas": "solo internacional",
+      "id": 6
+    }
+  ]
+}

@@ -1,13 +1,30 @@
 import React from 'react'
 import {Formik, Form, Field } from 'formik'
+import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import Alerta from './Alerta'
 
 export const Formulario = () => {
+     const navigate = useNavigate()
 
-     const handleSubmit =(valores) => {
-          console.log('llego aqui')
+     const handleSubmit = async (valores) => {
           console.log(valores)
+     try {
+          const url = 'http://localhost:4000/clientes'
+
+          const respuesta = await fetch(url, {
+               method:'POST',
+               body: JSON.stringify(valores),
+               headers : {'Content-Type': 'application/json'}
+          })
+          
+          const resultado = await respuesta.json()
+      
+          navigate('/clientes')
+          console.log('he llegado')
+     } catch (error) {
+               console.log(error)
+           }
      }
 
      const nuevoClienteShema = Yup.object().shape({
@@ -40,9 +57,10 @@ export const Formulario = () => {
                     telf : '',
                     notas :''
                }}
-               onSubmit={(values) =>(
-                    handleSubmit(values)
-               ) }
+               onSubmit={async (values, {resetForm}) => 
+                  {  handleSubmit(values)
+                    resetForm()
+               }}
                validationSchema= {nuevoClienteShema}
           >
                {({errors, touched}) => { 
@@ -71,7 +89,7 @@ export const Formulario = () => {
                          <label
                               className="text-gray-800"
                               htmlFor='empresa'>
-                                   Nombre :
+                                   Empresa :
                          </label>
                          <Field 
                               id="empresa"
@@ -140,7 +158,7 @@ export const Formulario = () => {
                     <input
                          type="submit" 
                          value="agregar cliente"
-                         className='mt-5 w-full p-3 bg-blue-800 text-white uppercase font-bold text-lg text-center'
+                         className='mt-5 w-full p-3 bg-blue-800 text-white uppercase font-bold text-lg text-center cursor-pointer'
                     />
                </Form>
                     )}}
