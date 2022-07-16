@@ -1,28 +1,12 @@
 {
   "clientes": [
     {
-      "nombre": "jorge",
-      "empresa": "empresa",
-      "mail": "jordi@email.com",
-      "telf": "938800222",
-      "notas": "buscando cliente",
-      "id": 1
-    },
-    {
       "nombre": "juan",
       "empresa": "vtc",
       "mail": "correo@correo.es",
       "telf": "888888888",
       "notas": "recomendaddo por otro cliente",
       "id": 2
-    },
-    {
-      "nombre": "isabel",
-      "empresa": "diseño isa",
-      "mail": "mycorreo@servidor.com",
-      "telf": "5555555555",
-      "notas": "empresa de diseño",
-      "id": 3
     },
     {
       "nombre": "nefer",
@@ -47,6 +31,22 @@
       "telf": "222222",
       "notas": "solo internacional",
       "id": 6
+    },
+    {
+      "nombre": "Andrea",
+      "empresa": "Casa Andrea",
+      "mail": "micorreo@andreas.com",
+      "telf": "666666666666",
+      "notas": "sin notas",
+      "id": 7
+    },
+    {
+      "nombre": "Jhon Doe",
+      "empresa": "Doe Services",
+      "mail": "jhondoe@correo.com",
+      "telf": "41343434",
+      "notas": "PROBANDO",
+      "id": 8
     }
   ]
 }

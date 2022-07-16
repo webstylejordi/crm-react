@@ -3,36 +3,52 @@ import {Formik, Form, Field } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import Alerta from './Alerta'
+import Spinner from './Spinner'
 
-export const Formulario = () => {
+const Formulario = ({cliente, cargando}) => {
      const navigate = useNavigate()
 
      const handleSubmit = async (valores) => {
-          console.log(valores)
+          let respuesta 
      try {
-          const url = 'http://localhost:4000/clientes'
+          if (cliente.id) {
+               //editando un registro 
+               const url = ` http://localhost:4000/clientes/${cliente.id}`
 
-          const respuesta = await fetch(url, {
+               respuesta = await fetch(url, {
+                    method:'PUT',
+                    body: JSON.stringify(valores),
+                    headers : {'Content-Type': 'application/json'}
+                    })
+               
+          } else {
+           //Nuevo registro   
+               const url = 'http://localhost:4000/clientes'
+               respuesta = await fetch(url, {
                method:'POST',
                body: JSON.stringify(valores),
                headers : {'Content-Type': 'application/json'}
-          })
-          
-          const resultado = await respuesta.json()
-      
+    })
+    
+          }
+          await respuesta.json()
+
           navigate('/clientes')
-          console.log('he llegado')
+
      } catch (error) {
                console.log(error)
            }
+
+           
      }
+           
 
      const nuevoClienteShema = Yup.object().shape({
           nombre : Yup.string()
                       .required('el nombre del cliente es obligatorio')
                       .min(3,'el nombre es muy corto'),
           empresa : Yup.string()
-                      .required('la empresae es obligatoria'),
+                      .required('la empresa es obligatoria'),
           mail :  Yup.string()
                      .required('se necesita un email')
                      .email('formato incorrecto de email'),
@@ -44,19 +60,23 @@ export const Formulario = () => {
 })
 
   return (
+     cargando ? <Spinner /> : ( 
     <div className='bg-white mt-10 px-5 py-10 shadow-md rounded-md md:w-3/4 mx-auto'>
           <h1 className='font-bold  text-gray-600 text-xl uppercase text-center'>
-               Agregar Cliente
+              {cliente.nombre? 'Editar Cliente' : 'Agregar Cliente'} 
           </h1>
  
           <Formik
                initialValues={{
-                    nombre : '',
-                    empresa : '',
-                    mail : '',
-                    telf : '',
-                    notas :''
+                    nombre :  cliente?.nombre ?? "",
+                    empresa :   cliente?.empresa ?? "",
+                    mail : cliente?.mail ?? "",
+                    telf : cliente?.telf ?? "",
+                    notas : cliente?.notas ?? "",
                }}
+
+               enableReinitialize={true}
+
                onSubmit={async (values, {resetForm}) => 
                   {  handleSubmit(values)
                     resetForm()
@@ -157,12 +177,22 @@ export const Formulario = () => {
 
                     <input
                          type="submit" 
-                         value="agregar cliente"
+                         value={cliente.nombre? 'Editar Cliente' : 'Agregar Cliente'} 
                          className='mt-5 w-full p-3 bg-blue-800 text-white uppercase font-bold text-lg text-center cursor-pointer'
                     />
                </Form>
                     )}}
           </Formik>
     </div>
+    )
   )
+
+ 
+  }
+
+  Formulario.defaultProps = {
+     cliente:{}
 }
+
+export default Formulario
+
